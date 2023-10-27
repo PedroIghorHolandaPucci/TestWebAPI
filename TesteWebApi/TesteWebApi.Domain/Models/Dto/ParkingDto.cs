@@ -5,7 +5,7 @@ namespace TesteWebApi.Domain.Models.Dto
     public class ParkingDto
     {
         [Required]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public int QtdSpacesCar { get; set; }
@@ -16,7 +16,7 @@ namespace TesteWebApi.Domain.Models.Dto
         [Required]
         public int QtdSpacesBig { get; set; }
 
-        public ParkingDto(string? name, int qtdSpacesCar, int qtdSpacesMotorcycle, int qtdSpacesBig)
+        public ParkingDto(string name, int qtdSpacesCar, int qtdSpacesMotorcycle, int qtdSpacesBig)
         {
             Name = name;
             QtdSpacesCar = qtdSpacesCar;

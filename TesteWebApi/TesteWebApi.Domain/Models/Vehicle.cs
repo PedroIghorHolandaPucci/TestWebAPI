@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TesteWebApi.Domain.Models.Constants;
+﻿using TesteWebApi.Domain.Models.Constants;
 
 namespace TesteWebApi.Domain.Models
 {
