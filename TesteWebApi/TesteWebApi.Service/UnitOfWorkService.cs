@@ -25,7 +25,7 @@ namespace TesteWebApi.Service
             {
                 if (parkingService == null)
                 {
-                    parkingService = new ParkingService(_repositoryUoW, _mapper, _config);
+                    parkingService = new ParkingService(_repositoryUoW, _mapper);
                 }
                 return parkingService;
             }
@@ -38,7 +38,7 @@ namespace TesteWebApi.Service
             {
                 if (vehicleService == null)
                 {
-                    vehicleService = new VehicleService(_repositoryUoW, _mapper, _config);
+                    vehicleService = new VehicleService(_repositoryUoW, _mapper);
                 }
                 return vehicleService;
             }

@@ -8,6 +8,15 @@ namespace TesteWebApi.Domain.Models.Dto
         public string Name { get; set; }
 
         [Required]
+        public int TotalSpaceCar { get; set; }
+
+        [Required]
+        public int TotalSpaceMotorcycle { get; set; }
+
+        [Required]
+        public int TotalSpaceVan { get; set; }
+
+        [Required]
         public int QtdSpacesCar { get; set; }
 
         [Required]
@@ -16,12 +25,27 @@ namespace TesteWebApi.Domain.Models.Dto
         [Required]
         public int QtdSpacesBig { get; set; }
 
-        public ParkingDto(string name, int qtdSpacesCar, int qtdSpacesMotorcycle, int qtdSpacesBig)
+        [Required]
+        public DateTime? CreatedAt { get; set; }
+
+        public ParkingDto(
+            string name, 
+            int totalSpaceCar, 
+            int totalSpaceMotorcycle, 
+            int totalSpaceVan, 
+            int qtdSpacesCar, 
+            int qtdSpacesMotorcycle, 
+            int qtdSpacesBig, 
+            DateTime? createdAt)
         {
             Name = name;
+            TotalSpaceCar = totalSpaceCar;
+            TotalSpaceMotorcycle = totalSpaceMotorcycle;
+            TotalSpaceVan = totalSpaceVan;
             QtdSpacesCar = qtdSpacesCar;
             QtdSpacesMotorcycle = qtdSpacesMotorcycle;
             QtdSpacesBig = qtdSpacesBig;
+            CreatedAt = createdAt;
         }
     }
 }

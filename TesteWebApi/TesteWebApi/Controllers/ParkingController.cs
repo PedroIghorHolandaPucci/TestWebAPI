@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using TesteWebApi.Domain.Models;
 using TesteWebApi.Domain.Models.Dto;
 using TesteWebApi.Service.Interfaces;
@@ -42,7 +43,29 @@ namespace TesteWebApi.Controllers
             {
                 return BadRequest(new
                 {
-                    mensagem = "Erro ao realizar ao cadastrar um estacionamento " + ex + "!"
+                    mensagem = "Houve um erro ao cadastrar o estacionamento! "+ ex + ""
+                });
+            }
+        }
+
+        /// <summary>
+        /// Endpoint responsible for listing parkings
+        /// </summary>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ParkingDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllParkings()
+        {
+            try
+            {
+                var parkings = await _serviceUoW.ParkingService.GetAllParkings();
+                return Ok(parkings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Houve um erro ao carregar os estacionamentos "+ ex + ""
                 });
             }
         }

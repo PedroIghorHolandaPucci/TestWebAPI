@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TesteWebApi.Domain.Models.Constants;
 
 namespace TesteWebApi.Domain.Models
@@ -6,8 +7,9 @@ namespace TesteWebApi.Domain.Models
     public class Vehicle
     {
         [Key]
-        public Guid Id { get; set; }
-        public Parking Parking { get; set; } = new Parking();
+        public int Id { get; set; }
+        [ForeignKey("ParkingId")]
+        public int ParkingId { get; set; }
         public VehicleType VehicleType { get; set; }
         public string? VehicleBrand { get; set; }
         public string? VehicleModel { get; set; }

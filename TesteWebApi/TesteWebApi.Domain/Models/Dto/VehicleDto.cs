@@ -6,7 +6,7 @@ namespace TesteWebApi.Domain.Models.Dto
     public class VehicleDto
     {
         [Required]
-        public Parking Parking { get; set; }
+        public int ParkingId { get; set; }
 
         [Required]
         public VehicleType VehicleType { get; set; }
@@ -32,7 +32,8 @@ namespace TesteWebApi.Domain.Models.Dto
         [Required]
         public DateTime DateExit { get; set; }
 
-        public VehicleDto(Parking parking, 
+        public VehicleDto(
+            int parkingId,
             VehicleType vehicleType, 
             string? vehicleBrand, 
             string? vehicleModel, 
@@ -42,7 +43,7 @@ namespace TesteWebApi.Domain.Models.Dto
             DateTime dateEntry, 
             DateTime dateExit)
         {
-            Parking = parking;
+            ParkingId = parkingId;
             VehicleType = vehicleType;
             VehicleBrand = vehicleBrand;
             VehicleModel = vehicleModel;

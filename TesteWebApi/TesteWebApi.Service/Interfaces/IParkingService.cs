@@ -6,5 +6,7 @@ namespace TesteWebApi.Service.Interfaces
     public interface IParkingService
     {
         public Task<Parking> AddParking(ParkingDto parkingDto);
+        public Task<List<Parking>> GetAllParkings();
+        public Task<Parking?> UpdateSpacesCarParking(int id);
     }
 }

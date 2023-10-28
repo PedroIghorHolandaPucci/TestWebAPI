@@ -33,7 +33,6 @@ namespace TesteWebApi.Teste
 
             // Assert
             Assert.NotNull(vehicle);
-            Assert.NotNull(vehicle.Parking);
             Assert.Equal(vehicleType, vehicle.VehicleType);
             Assert.Equal(vehicleBrand, vehicle.VehicleBrand);
             Assert.Equal(vehicleModel, vehicle.VehicleModel);
@@ -72,7 +71,6 @@ namespace TesteWebApi.Teste
 
             // Assert
             Assert.NotNull(vehicle);
-            Assert.NotNull(vehicle.Parking);
             Assert.Equal(vehicleType, vehicle.VehicleType);
             Assert.Equal(vehicleBrand, vehicle.VehicleBrand);
             Assert.Equal(vehicleModel, vehicle.VehicleModel);
@@ -111,7 +109,6 @@ namespace TesteWebApi.Teste
 
             // Assert
             Assert.NotNull(vehicle);
-            Assert.NotNull(vehicle.Parking);
             Assert.Equal(vehicleType, vehicle.VehicleType);
             Assert.Equal(vehicleBrand, vehicle.VehicleBrand);
             Assert.Equal(vehicleModel, vehicle.VehicleModel);

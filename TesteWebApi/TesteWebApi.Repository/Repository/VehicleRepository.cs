@@ -1,4 +1,5 @@
-﻿using TesteWebApi.Repository.Repository.Interfaces;
+﻿using TesteWebApi.Domain.Models;
+using TesteWebApi.Repository.Repository.Interfaces;
 
 namespace TesteWebApi.Repository.Repository
 {
@@ -9,6 +10,12 @@ namespace TesteWebApi.Repository.Repository
         public VehicleRepository(DataBaseContext context)
         {
             _context = context;
+        }
+
+        public async Task<Vehicle> AddVechile(Vehicle vehicle)
+        {
+            var result = await _context.Vehicle.AddAsync(vehicle);
+            return result.Entity;
         }
     }
 }

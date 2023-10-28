@@ -10,7 +10,7 @@ namespace TesteWebApi.Teste
         public void CreateVehicleDto_WithValidValues()
         {
             // Arrange
-            var parking = new Parking();
+            var parking = 1;
             var vehicleType = VehicleType.Car;
             var vehicleBrand = "Carro teste 1";
             var vehicleModel = "Usuario carro teste 1";
@@ -34,7 +34,7 @@ namespace TesteWebApi.Teste
 
             // Assert
             Assert.NotNull(vehicleDto);
-            Assert.Equal(parking, vehicleDto.Parking);
+            Assert.Equal(parking, vehicleDto.ParkingId);
             Assert.Equal(vehicleType, vehicleDto.VehicleType);
             Assert.Equal(vehicleBrand, vehicleDto.VehicleBrand);
             Assert.Equal(vehicleModel, vehicleDto.VehicleModel);
