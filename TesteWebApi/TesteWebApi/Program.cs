@@ -1,12 +1,11 @@
 using AutoMapper;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-using TesteWebApi.Repository.Repository.Interfaces;
-using TesteWebApi.Repository.Repository;
-using TesteWebApi.Repository;
-using TesteWebApi.Service.Interfaces;
-using TesteWebApi.Service;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using TesteWebApi.Repository;
+using TesteWebApi.Repository.Repository;
+using TesteWebApi.Repository.Repository.Interfaces;
+using TesteWebApi.Service;
+using TesteWebApi.Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
