@@ -188,6 +188,7 @@ namespace TesteWebApi.Service
         {
             Vehicle vehicle = _mapper.Map<VehicleDto, Vehicle>(vehicleDto);
             vehicle.ParkingId = id;
+            vehicle.DateEntry = DateTime.UtcNow;
             return await _repositoryUoW.VehicleRepository.AddVechile(vehicle);
         }
     }

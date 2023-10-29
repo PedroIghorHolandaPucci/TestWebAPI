@@ -9,6 +9,8 @@ namespace TesteWebApi.Teste
         public void CreateVehicleCar_WithCustomValues()
         {
             // Arrange
+            var id = 1;
+            var parkingId = 1;
             var vehicleType = VehicleType.Car;
             var vehicleBrand = "Carro1";
             var vehicleModel = "ModeloX";
@@ -21,6 +23,8 @@ namespace TesteWebApi.Teste
             // Act
             var vehicle = new Vehicle
             {
+                Id = id,
+                ParkingId = parkingId,
                 VehicleType = vehicleType,
                 VehicleBrand = vehicleBrand,
                 VehicleModel = vehicleModel,
@@ -33,6 +37,8 @@ namespace TesteWebApi.Teste
 
             // Assert
             Assert.NotNull(vehicle);
+            Assert.Equal(id, vehicle.Id);
+            Assert.Equal(parkingId, vehicle.ParkingId);
             Assert.Equal(vehicleType, vehicle.VehicleType);
             Assert.Equal(vehicleBrand, vehicle.VehicleBrand);
             Assert.Equal(vehicleModel, vehicle.VehicleModel);
@@ -47,6 +53,8 @@ namespace TesteWebApi.Teste
         public void CreateVehicleVan_WithCustomValues()
         {
             // Arrange
+            var id = 1;
+            var parkingId = 1;
             var vehicleType = VehicleType.Van;
             var vehicleBrand = "Van1";
             var vehicleModel = "ModeloX";
@@ -59,6 +67,8 @@ namespace TesteWebApi.Teste
             // Act
             var vehicle = new Vehicle
             {
+                Id = id,
+                ParkingId = parkingId,
                 VehicleType = vehicleType,
                 VehicleBrand = vehicleBrand,
                 VehicleModel = vehicleModel,
@@ -71,6 +81,8 @@ namespace TesteWebApi.Teste
 
             // Assert
             Assert.NotNull(vehicle);
+            Assert.Equal(id, vehicle.Id);
+            Assert.Equal(parkingId, vehicle.ParkingId);
             Assert.Equal(vehicleType, vehicle.VehicleType);
             Assert.Equal(vehicleBrand, vehicle.VehicleBrand);
             Assert.Equal(vehicleModel, vehicle.VehicleModel);
@@ -85,6 +97,8 @@ namespace TesteWebApi.Teste
         public void CreateVehicleMotorciclye_WithCustomValues()
         {
             // Arrange
+            var id = 1;
+            var parkingId = 1;
             var vehicleType = VehicleType.Motorcycle;
             var vehicleBrand = "Moto1";
             var vehicleModel = "ModeloX";
@@ -97,6 +111,8 @@ namespace TesteWebApi.Teste
             // Act
             var vehicle = new Vehicle
             {
+                Id = id,
+                ParkingId = parkingId,
                 VehicleType = vehicleType,
                 VehicleBrand = vehicleBrand,
                 VehicleModel = vehicleModel,
@@ -109,6 +125,8 @@ namespace TesteWebApi.Teste
 
             // Assert
             Assert.NotNull(vehicle);
+            Assert.Equal(id, vehicle.Id);
+            Assert.Equal(parkingId, vehicle.ParkingId);
             Assert.Equal(vehicleType, vehicle.VehicleType);
             Assert.Equal(vehicleBrand, vehicle.VehicleBrand);
             Assert.Equal(vehicleModel, vehicle.VehicleModel);
@@ -123,6 +141,8 @@ namespace TesteWebApi.Teste
         public void CreateVehicleMotorciclye_ErrorValues()
         {
             // Arrange
+            var id = 1;
+            var parkingId = 1;
             var vehicleType = VehicleType.Motorcycle;
             var vehicleModel = "ModeloX";
             var licensePlate = "ABC-125";
@@ -134,6 +154,8 @@ namespace TesteWebApi.Teste
             // Act
             var vehicle = new Vehicle
             {
+                Id = id,
+                ParkingId = parkingId,
                 VehicleType = vehicleType,
                 VehicleBrand = null,
                 VehicleModel = vehicleModel,
