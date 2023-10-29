@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using TesteWebApi.Domain.Models;
 using TesteWebApi.Domain.Models.Dto;
 using TesteWebApi.Service.Interfaces;
@@ -110,6 +111,44 @@ namespace TesteWebApi.Controllers
                 {
                     mensagem = "Houve um erro ao carregar os estacionamentos " + ex + ""
                 }));
+            }
+        }
+
+        /// <summary>
+        /// Parking is full
+        /// </summary>
+        [HttpGet("fullParking")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetFullParking(int id)
+        {
+            try
+            {
+                bool situationFullParking = _serviceUoW.ParkingService.GetFullParking(id);
+                return Ok(situationFullParking);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        /// <summary>
+        /// Parking is empty
+        /// </summary>
+        [HttpGet("emptyParking")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetEmptyParking(int id)
+        {
+            try
+            {
+                bool situationFullParking = _serviceUoW.ParkingService.GetEmptyParking(id);
+                return Ok(situationFullParking);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
     }
