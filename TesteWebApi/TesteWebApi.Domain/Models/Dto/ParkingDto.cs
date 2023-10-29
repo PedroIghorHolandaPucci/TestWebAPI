@@ -28,6 +28,8 @@ namespace TesteWebApi.Domain.Models.Dto
         [Required]
         public DateTime? CreatedAt { get; set; }
 
+        public ParkingDto() { }
+
         public ParkingDto(
             string name, 
             int totalSpaceCar, 
@@ -46,6 +48,18 @@ namespace TesteWebApi.Domain.Models.Dto
             QtdSpacesMotorcycle = qtdSpacesMotorcycle;
             QtdSpacesBig = qtdSpacesBig;
             CreatedAt = createdAt;
+        }
+
+        public ParkingDto(
+            string name, 
+            int totalSpaceCar, 
+            int totalSpaceVan, 
+            int totalSpaceMotorcycle)
+        {
+            Name = name;
+            TotalSpaceCar = totalSpaceCar;
+            TotalSpaceVan = totalSpaceVan;
+            TotalSpaceMotorcycle = totalSpaceMotorcycle;
         }
     }
 }

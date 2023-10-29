@@ -36,6 +36,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TesteWebApi.Domain\TesteWebApi.Domain.csproj" />
+    <ProjectReference Include="..\TesteWebApi.Repository\TesteWebApi.Repository.csproj" />
+    <ProjectReference Include="..\TesteWebApi.Service\TesteWebApi.Service.csproj" />
   </ItemGroup>
 
 </Project>

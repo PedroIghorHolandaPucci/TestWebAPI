@@ -38,7 +38,7 @@ namespace TesteWebApi.Service
             {
                 if (vehicleService == null)
                 {
-                    vehicleService = new VehicleService(_repositoryUoW, _mapper);
+                    vehicleService = new VehicleService(_repositoryUoW);
                 }
                 return vehicleService;
             }

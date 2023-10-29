@@ -17,7 +17,12 @@ namespace TesteWebApi.Service
         {
             _repositoryUoW = repositoryUoW;
             _mapper = mapper;
-        }        
+        }
+
+        public ParkingService(IRepositoryUoW repositoryUoW)
+        {
+            _repositoryUoW = repositoryUoW;
+        }
 
         public async Task<Parking> AddParking(ParkingDto parkingDto)
         {
