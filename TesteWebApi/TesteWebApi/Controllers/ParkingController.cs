@@ -50,7 +50,7 @@ namespace TesteWebApi.Controllers
         /// <summary>
         /// Endpoint responsible for listing parkings
         /// </summary>
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ParkingDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllParkings()

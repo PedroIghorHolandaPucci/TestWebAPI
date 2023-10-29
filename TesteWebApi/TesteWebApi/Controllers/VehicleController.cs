@@ -50,7 +50,7 @@ namespace TesteWebApi.Controllers
         /// <summary>
         /// Endpoint responsible for listing vehicles
         /// </summary>
-        [HttpGet]
+        [HttpGet("all")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<VehicleDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllVehicles()
@@ -58,6 +58,28 @@ namespace TesteWebApi.Controllers
             try
             {
                 var parkings = await _serviceUoW.VehicleService.GetAllVehicles();
+                return Ok(parkings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Houve um erro ao carregar os estacionamentos " + ex + ""
+                });
+            }
+        }
+
+        /// <summary>
+        /// Listing all vans in parking
+        /// </summary>
+        [HttpGet("vans")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<VehicleDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllVanForParking(int id)
+        {
+            try
+            {
+                var parkings = await _serviceUoW.VehicleService.GetAllVanForParking(id);
                 return Ok(parkings);
             }
             catch (Exception ex)
