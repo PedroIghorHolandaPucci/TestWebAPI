@@ -105,13 +105,7 @@ namespace TesteWebApi.Service
 
         public async Task<Parking?> RoleVehicleVan(VehicleDto vehicleDto, Parking parking, int id)
         {
-            using var transaction = _repositoryUoW.BeginTransaction();
-
-            if (parking.TotalSpaceMotorcycle != parking.QtdSpacesMotorcycle)
-            {
-                parking.QtdSpacesMotorcycle++;
-            }
-            else if (parking.TotalSpaceCar != parking.QtdSpacesCar)
+            if (parking.TotalSpaceCar != parking.QtdSpacesCar)
             {
                 parking.QtdSpacesCar = parking.QtdSpacesCar + 2;
             }
@@ -128,15 +122,12 @@ namespace TesteWebApi.Service
             await CreateVehicle(vehicleDto, id);
 
             await _repositoryUoW.SaveAsync();
-            await transaction.CommitAsync();
 
             return result;
         }
 
         public async Task<Parking?> RoleVehicleMotorcycle(VehicleDto vehicleDto, Parking parking, int id)
         {
-            using var transaction = _repositoryUoW.BeginTransaction();
-
             if (parking.TotalSpaceMotorcycle != parking.QtdSpacesMotorcycle)
             {
                 parking.QtdSpacesMotorcycle++;
@@ -158,15 +149,12 @@ namespace TesteWebApi.Service
             await CreateVehicle(vehicleDto, id);
 
             await _repositoryUoW.SaveAsync();
-            await transaction.CommitAsync();
-
+            
             return result;
         }
 
         public async Task<Parking?> RoleVehicleCar(VehicleDto vehicleDto, Parking parking, int id)
         {
-            using var transaction = _repositoryUoW.BeginTransaction();
-
             if (parking.TotalSpaceCar != parking.QtdSpacesCar)
             {
                 parking.QtdSpacesCar++;
@@ -184,8 +172,7 @@ namespace TesteWebApi.Service
             await CreateVehicle(vehicleDto, id);
 
             await _repositoryUoW.SaveAsync();
-            await transaction.CommitAsync();
-
+            
             return result;
         }
 
