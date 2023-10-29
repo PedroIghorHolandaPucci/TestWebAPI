@@ -1,4 +1,5 @@
-﻿using TesteWebApi.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TesteWebApi.Domain.Models;
 using TesteWebApi.Repository.Repository.Interfaces;
 
 namespace TesteWebApi.Repository.Repository
@@ -16,6 +17,11 @@ namespace TesteWebApi.Repository.Repository
         {
             var result = await _context.Vehicle.AddAsync(vehicle);
             return result.Entity;
+        }
+
+        public async Task<List<Vehicle>> GetAllVehicles()
+        {
+            return await _context.Vehicle.ToListAsync();
         }
     }
 }

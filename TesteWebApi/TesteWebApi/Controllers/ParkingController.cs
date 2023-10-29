@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using TesteWebApi.Domain.Models;
 using TesteWebApi.Domain.Models.Dto;
 using TesteWebApi.Service.Interfaces;

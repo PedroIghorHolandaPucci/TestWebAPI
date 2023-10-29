@@ -16,5 +16,21 @@ namespace TesteWebApi.Service
             _repositoryUoW = repositoryUoW;
             _mapper = mapper;
         }
+
+        public async Task<List<Vehicle>> GetAllVehicles()
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<Vehicle> vehicles = await _repositoryUoW.VehicleRepository.GetAllVehicles();
+                _repositoryUoW.Commit();
+                return vehicles;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Erro inesperado " + ex + "!");
+            }
+        }
     }
 }
