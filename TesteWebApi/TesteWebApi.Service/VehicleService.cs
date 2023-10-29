@@ -28,5 +28,21 @@ namespace TesteWebApi.Service
                 throw new InvalidOperationException("Erro inesperado " + ex + "!");
             }
         }
+
+        public async Task<List<Vehicle>> GetAllVanForParking(int parkingId)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<Vehicle> vehicles = await _repositoryUoW.VehicleRepository.GetAllVanForParking(parkingId);
+                _repositoryUoW.Commit();
+                return vehicles;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Erro inesperado " + ex + "!");
+            }
+        }
     }
 }

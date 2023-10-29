@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TesteWebApi.Domain.Models;
+using TesteWebApi.Domain.Models.Constants;
 using TesteWebApi.Repository.Repository.Interfaces;
 
 namespace TesteWebApi.Repository.Repository
@@ -22,6 +23,11 @@ namespace TesteWebApi.Repository.Repository
         public async Task<List<Vehicle>> GetAllVehicles()
         {
             return await _context.Vehicle.ToListAsync();
+        }
+
+        public async Task<List<Vehicle>> GetAllVanForParking(int parkingId)
+        {
+            return await _context.Vehicle.Where(vehicle => vehicle.ParkingId == parkingId && vehicle.VehicleType == VehicleType.Van).ToListAsync();
         }
     }
 }
