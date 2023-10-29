@@ -68,5 +68,49 @@ namespace TesteWebApi.Controllers
                 });
             }
         }
+
+        /// <summary>
+        /// Endpoint responsible for return total number at parking
+        /// </summary>
+        [HttpGet("allSpaces")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ParkingDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public Task<IActionResult> GetAllSpacesParking(int id)
+        {
+            try
+            {
+                int allSpaces = _serviceUoW.ParkingService.GetAllSpacesParking(id);
+                return Task.FromResult<IActionResult>(Ok(allSpaces));
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult<IActionResult>(BadRequest(new
+                {
+                    mensagem = "Houve um erro ao carregar os estacionamentos " + ex + ""
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Endpoint responsible for return total empty number at parking
+        /// </summary>
+        [HttpGet("allSpacesEmpties")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ParkingDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public Task<IActionResult> GetEmptySpacesParking(int id)
+        {
+            try
+            {
+                int allSpaces = _serviceUoW.ParkingService.GetEmptySpacesParking(id);
+                return Task.FromResult<IActionResult>(Ok(allSpaces));
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult<IActionResult>(BadRequest(new
+                {
+                    mensagem = "Houve um erro ao carregar os estacionamentos " + ex + ""
+                }));
+            }
+        }
     }
 }

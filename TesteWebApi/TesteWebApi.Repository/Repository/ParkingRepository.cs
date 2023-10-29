@@ -35,5 +35,22 @@ namespace TesteWebApi.Repository.Repository
             return await _context.Parking.Where(e => e.Id == id)
                 .FirstOrDefaultAsync() ?? throw new Exception("Estacionamento não encontrado!");
         }
+
+        public int GetAllSpacesParking(int id)
+        {
+            var result = _context.Parking.Where(p => p.Id == id).Select(p => p.TotalSpaceCar + p.TotalSpaceMotorcycle + p.TotalSpaceVan).Sum();
+            return result;
+        }
+
+        public int GetEmptySpacesParking(int id)
+        {
+            var result = _context.Parking.
+                Where(p => p.Id == id)
+                .Select(
+                p => (p.TotalSpaceCar + p.TotalSpaceMotorcycle + p.TotalSpaceVan) 
+                - (p.QtdSpacesCar + p.QtdSpacesMotorcycle + p.QtdSpacesBig))
+                .Sum();
+            return result;
+        }
     }
 }

@@ -60,6 +60,38 @@ namespace TesteWebApi.Service
             }
         }
 
+        public int GetAllSpacesParking(int id)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                int allSpacesParking = _repositoryUoW.ParkingRepository.GetAllSpacesParking(id);
+                _repositoryUoW.Commit();
+                return allSpacesParking;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Erro inesperado " + ex + "!");
+            }
+        }
+
+        public int GetEmptySpacesParking(int id)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                int emptyAllSpacesParking = _repositoryUoW.ParkingRepository.GetEmptySpacesParking(id);
+                _repositoryUoW.Commit();
+                return emptyAllSpacesParking;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Erro inesperado " + ex + "!");
+            }
+        }
+
         public async Task<Parking?> UpdateSpacesParking(VehicleDto vehicleDto, int id)
         {
             using var transaction = _repositoryUoW.BeginTransaction();
