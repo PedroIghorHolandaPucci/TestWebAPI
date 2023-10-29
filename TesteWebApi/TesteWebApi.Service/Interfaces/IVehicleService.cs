@@ -5,6 +5,5 @@ namespace TesteWebApi.Service.Interfaces
 {
     public interface IVehicleService
     {
-        public Task<Vehicle> AddCar(VehicleDto vehicleDto);
     }
 }

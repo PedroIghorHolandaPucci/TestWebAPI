@@ -28,11 +28,11 @@ namespace TesteWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> CreateSpaceCar([FromBody] VehicleDto vehicleDto)
+        public async Task<IActionResult> CreateSpaceCar([FromBody] VehicleDto vehicleDto, int id)
         {
             try
             {
-                Vehicle vehicle = await _serviceUoW.VehicleService.AddCar(vehicleDto);
+                Parking? parking = await _serviceUoW.ParkingService.UpdateSpacesParking(vehicleDto, id);
                 return Ok(new
                 {
                     mensagem = $"Cadastro de estacionamento realizado com sucesso."

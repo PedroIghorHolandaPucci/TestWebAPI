@@ -16,25 +16,5 @@ namespace TesteWebApi.Service
             _repositoryUoW = repositoryUoW;
             _mapper = mapper;
         }
-
-        public async Task<Vehicle> AddCar(VehicleDto vehicleDto)
-        {
-            using var transaction = _repositoryUoW.BeginTransaction();
-            try
-            {
-                Vehicle vehicle = _mapper.Map<VehicleDto, Vehicle>(vehicleDto);
-                vehicle.DateEntry = DateTime.Now;
-                var result = await _repositoryUoW.VehicleRepository.AddVechile(vehicle);
-
-                await _repositoryUoW.SaveAsync();
-                await transaction.CommitAsync();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                throw new InvalidOperationException("Erro inesperado " + ex + "!");
-            }
-        }
     }
 }

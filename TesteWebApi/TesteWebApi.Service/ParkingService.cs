@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TesteWebApi.Domain.Models;
+using TesteWebApi.Domain.Models.Constants;
 using TesteWebApi.Domain.Models.Dto;
 using TesteWebApi.Repository.Repository.Interfaces;
 using TesteWebApi.Service.Interfaces;
@@ -54,47 +55,140 @@ namespace TesteWebApi.Service
             }
         }
 
-        public async Task<Parking?> UpdateSpacesCarParking(int id)
+        public async Task<Parking?> UpdateSpacesParking(VehicleDto vehicleDto, int id)
         {
             using var transaction = _repositoryUoW.BeginTransaction();
+
             try
             {
                 Parking? parking = await _repositoryUoW.ParkingRepository.GetParkingById(id);
 
-                if (parking?.TotalSpaceCar != parking?.QtdSpacesCar)
+                if (parking != null)
                 {
-                    parking.QtdSpacesCar++;
-                    result = _repositoryUoW.ParkingRepository.UpdateParking(parking);
-                    
-                    //Vehicle vehicle = _mapper.Map<VehicleDto, Vehicle>(vehicleDto);
-                    //vehicle.Parking.Id = id;
-                    //await _repositoryUoW.VehicleRepository.AddVechile(vehicle);
+                    if (vehicleDto.VehicleType == VehicleType.Motorcycle)
+                    {
+                        parking = await RoleVehicleMotorcycle(vehicleDto, parking, id);
+                    }
 
+                    if (vehicleDto.VehicleType == VehicleType.Car)
+                    {
+                        parking = await RoleVehicleCar(vehicleDto, parking, id);
+                    }
+
+                    if (vehicleDto.VehicleType == VehicleType.Van)
+                    {
+                        parking = await RoleVehicleVan(vehicleDto, parking, id);
+                    }
+
+                    _repositoryUoW.ParkingRepository.UpdateParking(parking);
                     await _repositoryUoW.SaveAsync();
                     await transaction.CommitAsync();
+
+                    return parking;
                 }
                 else
                 {
-                    if (parking?.TotalSpaceVan != parking?.QtdSpacesBig)
-                    {
-                        parking.QtdSpacesBig++;
-                        result = _repositoryUoW.ParkingRepository.UpdateParking(parking);
-
-                        await _repositoryUoW.SaveAsync();
-                        await transaction.CommitAsync();
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("Não existem vagas suficientes para carro nas vagas de carro e nas vagas de van!");
-                    }
+                    return null;
                 }
-                return result;
             }
             catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new InvalidOperationException("Erro inesperado " + ex + "!");
+                throw new InvalidOperationException("Erro inesperado: " + ex.Message);
             }
+        }
+
+        public async Task<Parking?> RoleVehicleVan(VehicleDto vehicleDto, Parking parking, int id)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+
+            if (parking.TotalSpaceMotorcycle != parking.QtdSpacesMotorcycle)
+            {
+                parking.QtdSpacesMotorcycle++;
+            }
+            else if (parking.TotalSpaceCar != parking.QtdSpacesCar)
+            {
+                parking.QtdSpacesCar = parking.QtdSpacesCar + 2;
+            }
+            else if (parking.TotalSpaceVan != parking.QtdSpacesBig)
+            {
+                parking.QtdSpacesBig++;
+            }
+            else
+            {
+                throw new InvalidOperationException("Não existem vagas suficientes para a van em todas as vagas!");
+            }
+
+            var result = _repositoryUoW.ParkingRepository.UpdateParking(parking);
+            await CreateVehicle(vehicleDto, id);
+
+            await _repositoryUoW.SaveAsync();
+            await transaction.CommitAsync();
+
+            return result;
+        }
+
+        public async Task<Parking?> RoleVehicleMotorcycle(VehicleDto vehicleDto, Parking parking, int id)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+
+            if (parking.TotalSpaceMotorcycle != parking.QtdSpacesMotorcycle)
+            {
+                parking.QtdSpacesMotorcycle++;
+            }
+            else if (parking.TotalSpaceCar != parking.QtdSpacesCar)
+            {
+                parking.QtdSpacesCar++;
+            }
+            else if (parking.TotalSpaceVan != parking.QtdSpacesBig)
+            {
+                parking.QtdSpacesBig++;
+            }
+            else
+            {
+                throw new InvalidOperationException("Não existem vagas suficientes para a moto em todas as vagas!");
+            }
+
+            var result = _repositoryUoW.ParkingRepository.UpdateParking(parking);
+            await CreateVehicle(vehicleDto, id);
+
+            await _repositoryUoW.SaveAsync();
+            await transaction.CommitAsync();
+
+            return result;
+        }
+
+        public async Task<Parking?> RoleVehicleCar(VehicleDto vehicleDto, Parking parking, int id)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+
+            if (parking.TotalSpaceCar != parking.QtdSpacesCar)
+            {
+                parking.QtdSpacesCar++;
+            }
+            else if (parking.TotalSpaceVan != parking.QtdSpacesBig)
+            {
+                parking.QtdSpacesBig++;
+            }
+            else
+            {
+                throw new InvalidOperationException("Não existem vagas suficientes para carros nas vagas de carro e de van!");
+            }
+
+            var result = _repositoryUoW.ParkingRepository.UpdateParking(parking);
+            await CreateVehicle(vehicleDto, id);
+
+            await _repositoryUoW.SaveAsync();
+            await transaction.CommitAsync();
+
+            return result;
+        }
+
+        public async Task<Vehicle> CreateVehicle(VehicleDto vehicleDto, int id)
+        {
+            Vehicle vehicle = _mapper.Map<VehicleDto, Vehicle>(vehicleDto);
+            vehicle.ParkingId = id;
+            return await _repositoryUoW.VehicleRepository.AddVechile(vehicle);
         }
     }
 }
